@@ -49,3 +49,23 @@ test("Pos_Fun_0004 - Compound sentence", async ({ page }) => {
 test("Pos_Fun_0005 - Compound agreement", async ({ page }) => {
   await fillAndExpect(page, "oyaa hari ehenam api yamu", "ඔයා");
 });
+
+test("Pos_Fun_006 - Complex conditional", async ({ page }) => {
+  await fillAndExpect(page, "oya enavaanam mama balan innavaa", "නම්");
+});
+
+test("Pos_Fun_0007 - Cause effect", async ({ page }) => {
+  await fillAndExpect(page, "vaessa unath api yanna epaeyi", "එපැයි");
+});
+
+test("Pos_Fun_0008 - Interrogative question", async ({ page }) => {
+  await fillAndExpect(page, "heta oyagee uthsavayadha", "ද");
+});
+
+test("Pos_Fun_0009 - Interrogative future", async ({ page }) => {
+  await fillAndExpect(page, "oyaa kavadhdha enna hithan inne?", "කවද්ද");
+});
+
+test("Pos_Fun_0010 - Imperative command", async ({ page }) => {
+  await fillAndExpect(page, "issarahata yanna", "යන්න");
+});
