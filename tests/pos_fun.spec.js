@@ -69,3 +69,27 @@ test("Pos_Fun_0009 - Interrogative future", async ({ page }) => {
 test("Pos_Fun_0010 - Imperative command", async ({ page }) => {
   await fillAndExpect(page, "issarahata yanna", "යන්න");
 });
+
+test("Pos_Fun_0011 - Imperative request", async ({ page }) => {
+  await fillAndExpect(page, "mata kiyanna", "කියන්න");
+});
+
+test("Pos_Fun_0012 - Positive form", async ({ page }) => {
+  await fillAndExpect(page, "mama ehema karanavaa", "කරනවා");
+});
+
+test("Pos_Fun_0013 - Negative form", async ({ page }) => {
+  await fillAndExpect(page, "mama ehema karanne naehae", "නැහැ");
+});
+
+test("Pos_Fun_0014 - Greeting", async ({ page }) => {
+  await fillAndExpect(page, "aayuboovan", "ආයුබෝවන්");
+});
+
+test("Pos_Fun_0015 - Polite request", async ({ page }) => {
+  await fillAndExpect(
+    page,
+    "karunakaralaa mata podi udhavvak karanna puluvandha",
+    "කරුනකර",
+  );
+});
