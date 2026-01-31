@@ -39,7 +39,7 @@ npm -v
 
 ---
 
-###  Install Playwright Browsers
+###  Install Playwright 
 
 ```bash
 npm init playwright@latest
