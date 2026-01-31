@@ -44,10 +44,8 @@ const fillAndExpect = async (page, input, expectedText) => {
   }
 };
 
-// ------------------ 24 Tests ------------------
-
+// 24 positive functional tests
 test.describe("Positive Functional Tests (24) - Singlish to Sinhala", () => {
-
   test("Pos_Fun_0001 - Simple sentence", async ({ page }) => {
     await fillAndExpect(page, "mama gedhara yanavaa", "මම");
   });
@@ -143,5 +141,4 @@ test.describe("Positive Functional Tests (24) - Singlish to Sinhala", () => {
   test("Pos_Fun_0024 - Medium paragraph", async ({ page }) => {
     await fillAndExpect(page, "api passee kathaa karamu mokadha daen vaessa vahinavaa", "අපි");
   });
-
 });

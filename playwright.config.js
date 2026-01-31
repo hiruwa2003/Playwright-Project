@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     trace: 'on-first-retry',
-    navigationTimeout: 60000, 
+    navigationTimeout: 60000, // 60s
     actionTimeout: 0,
   },
   projects: [
