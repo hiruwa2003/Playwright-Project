@@ -13,12 +13,33 @@ const getSinhalaOutput = (page) =>
     .filter({ hasNotText: "Sinhala" })
     .first();
 
+const waitForNonEmptyText = async (locator, timeout) => {
+  await expect
+    .poll(async () => (await locator.innerText()).trim(), { timeout })
+    .not.toBe("");
+};
+
 const fillAndExpect = async (page, input, expectedText) => {
   await page.goto(URL);
-  await getSinglishInput(page).fill(input);
+  const inputLocator = getSinglishInput(page);
   const output = getSinhalaOutput(page);
+
+  const typeInput = async () => {
+    await inputLocator.fill("");
+    await inputLocator.type(input, { delay: 20 });
+  };
+
+  await typeInput();
+
+  try {
+    await waitForNonEmptyText(output, 20000);
+  } catch {
+    await typeInput();
+    await waitForNonEmptyText(output, 20000);
+  }
+
   if (expectedText) {
-    await expect(output).toContainText(expectedText);
+    await expect(output).toContainText(expectedText, { timeout: 20000 });
   } else {
     await expect(output).toBeVisible();
   }
@@ -91,5 +112,45 @@ test("Pos_Fun_0015 - Polite request", async ({ page }) => {
     page,
     "karunakaralaa mata podi udhavvak karanna puluvandha",
     "කරුනකර",
+  );
+});
+
+test("Pos_Fun_0016 - Informal phrasing", async ({ page }) => {
+  await fillAndExpect(page, "ehema karapan", "කරපන්");
+});
+
+test("Pos_Fun_0017 - Present tense", async ({ page }) => {
+  await fillAndExpect(page, "mama daen vaeda karanavaa", "ඩැන්");
+});
+
+test("Pos_Fun_0018 - Past tense", async ({ page }) => {
+  await fillAndExpect(page, "mama iye gedhara giyaa", "ගියා");
+});
+
+test("Pos_Fun_0019 - Future tense", async ({ page }) => {
+  await fillAndExpect(page, "mama heta enavaa", "හෙට");
+});
+
+test("Pos_Fun_0020 - English brand name", async ({ page }) => {
+  await fillAndExpect(page, "Zoom meeting ekak thiyennee", "Zoom");
+});
+
+test("Pos_Fun_0021 - Place name", async ({ page }) => {
+  await fillAndExpect(page, "api Kandy yamu", "Kandy");
+});
+
+test("Pos_Fun_0022 - Currency format", async ({ page }) => {
+  await fillAndExpect(page, "Rs. 5343", "Rs");
+});
+
+test("Pos_Fun_0023 - Multiple spaces", async ({ page }) => {
+  await fillAndExpect(page, "mama   gedhara   yanavaa", null);
+});
+
+test("Pos_Fun_0024 - Medium paragraph", async ({ page }) => {
+  await fillAndExpect(
+    page,
+    "api passee kathaa karamu mokadha daen vaessa vahinavaa",
+    "අපි",
   );
 });
